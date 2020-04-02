@@ -15,12 +15,15 @@ import javax.persistence.*;
 @Table(name = "ratings")
 public class Rating extends BaseEntity {
 
-/*    @Column(name="movie_id")
-    private Long movieId;*/
+    @Column(name="movie_id")
+    private Long movieId;
 
     @Column(name="rating")
     private Double rating;
 
-    @ManyToOne
-    private Movie movie;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    private Rater rater;
+
+
 }

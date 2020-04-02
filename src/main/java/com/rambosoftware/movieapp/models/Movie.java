@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -14,34 +17,28 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name="movies")
-public class Movie extends BaseEntity {
+public class Movie implements Serializable {
 
     @Builder
-    public Movie(Long id, String name, Long movieId, String posterUrl, Set<Rating> ratings, Set<Rater> raters) {
-        super(id);
+    public Movie(Long id, String name, Long movieId) {
+        this.movieId = id;
         this.name = name;
         this.movieId = movieId;
-        this.posterUrl = posterUrl;
-        this.ratings = ratings;
-        this.raters = raters;
     }
 
+    @Id
+    Long movieId;
 
     @Column(name="name")
     private String name;
 
-    @Column(name="movie_id")
-    @PrimaryKeyJoinColumn
-    private Long movieId;
 
-    @Column(name="poster_url")
-    private String posterUrl;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "movie", cascade = {CascadeType.ALL})
+    private List<Rater> raters = new ArrayList<>();
 
-    @OneToMany
+    public void addRater(Rater rater){
+        raters.add(rater);
+    }
 
-    private Set<Rating> ratings = new HashSet<>();
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
-    private Set<Rater> raters = new HashSet<>();
 
 }
