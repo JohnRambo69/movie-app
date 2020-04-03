@@ -6,6 +6,7 @@ import com.rambosoftware.movieapp.services.MovieService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -44,5 +45,8 @@ public void deleteById(Long aLong){
         movieRepository.deleteById(aLong);
         }
 
-
-        }
+    @Override
+    public List<Movie> findAllByNameLike(String name) {
+        return movieRepository.findAllByNameLike(name);
+    }
+}

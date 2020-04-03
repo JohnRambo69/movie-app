@@ -1,6 +1,5 @@
 package com.rambosoftware.movieapp.services.springdatajpa;
 
-import com.rambosoftware.movieapp.models.Movie;
 import com.rambosoftware.movieapp.models.MovieDetails;
 import com.rambosoftware.movieapp.repositories.MovieDetailRepository;
 import com.rambosoftware.movieapp.services.MovieDetailService;
@@ -44,6 +43,5 @@ public class JpaMovieDetailsService implements MovieDetailService {
     public void deleteById(Long aLong){
         movieDetailRepository.deleteById(aLong);
     }
-
 
 }

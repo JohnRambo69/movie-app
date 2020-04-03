@@ -37,7 +37,7 @@ public class RatersAndRatingLoader  {
 
             br = new BufferedReader(new FileReader(csvFile));
             br.readLine();
-            int maxLoad = 1000;
+            int maxLoad = 100000;
             while (maxLoad >= 0) {
 
                 line = br.readLine();

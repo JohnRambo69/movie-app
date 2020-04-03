@@ -20,8 +20,7 @@ import java.util.Set;
 public class Movie implements Serializable {
 
     @Builder
-    public Movie(Long id, String name, Long movieId) {
-        this.movieId = id;
+    public Movie( String name, Long movieId) {
         this.name = name;
         this.movieId = movieId;
     }

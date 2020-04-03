@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+<body>
+
+<h2>Owners</h2>
+
+<table id="vets" class="table table-striped">
+    <thead>
+    <tr>
+        <th style="width: 150px;">Name</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movies}">
+        <td>
+        </td>
+        <td th:text="${movie.movieId}"/>
+        <td>
+        <a th:href="@{/movie/__${movie.movieId}__}" th:text="${movie.name}"/></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value={"/"})
+    @RequestMapping(value={"/", "/home"})
     public String handler () {
 
         return "index";

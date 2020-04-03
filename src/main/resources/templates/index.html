@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <title>Movie Index</title>
 </head>
 <body>
-<h1> hello !!!</h1>
+<h2 th:text="#{welcome}">Welcome</h2>
+<div class="container">
+<div class="row">
+    <div class="col-md-6" align="center" style="margin-top: 70px">
+        <div class="card" style="width: 20rem;">
+            <img src="../static/resources/images/mix_logo.jpg" th:src="@{/resources/images/mix_logo.jpg}" class="card-img-top" alt="Rambo Software">
+            <div class="card-body" bgcolor="#E6E6FA">
+                <h5 class="card-title">Movie Mate</h5>
+                <p class="card-text">Nasza baza danych.
+                Jest do twojej dyspozycji. Posiadamy ponad 45 tysięcy filmów w naszej kolekcji !</p>
+                <a href="#" class="btn btn-primary">Znajdź Filmy Dla Mnie</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" align="center">
+        <img class="img-responsive" src="../static/resources/images/movie_time.png" th:src="@{/resources/images/movie_time.png}" width="50%" height="45%"/>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h3 class="display-4">Fluid jumbotron</h3>
+                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
 </body>
 </html>

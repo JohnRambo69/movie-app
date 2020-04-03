@@ -61,9 +61,10 @@ public class MovieDetailsLoader {
                 }
                 if(url != null) {
                     String getUrl = prefix + url.substring(url.length() - 31);
-                    MovieDetails md = movieDetailService.findById(m.getMovieId());
-                    md.setUrl(getUrl);
-                    movieDetailService.save(md);
+//                    MovieDetails md = movieDetailService.findById(m.getMovieId());
+//                    md.setUrl(getUrl);
+//                    movieDetailService.save(md);
+                    System.out.println(getUrl);
                 }else{
                     // System.out.println("Not Found.");
                 }
