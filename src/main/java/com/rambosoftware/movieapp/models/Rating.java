@@ -25,5 +25,18 @@ public class Rating extends BaseEntity {
     @JoinColumn(name = "user_id")
     private Rater rater;
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (!(o instanceof Rating)) {
+            return false;
+        }
+
+        Rating r = (Rating) o;
+
+        return r.getMovieId() == this.getMovieId();
+    }
 
 }
+
+

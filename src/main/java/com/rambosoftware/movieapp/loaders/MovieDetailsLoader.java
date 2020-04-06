@@ -4,9 +4,7 @@ import com.rambosoftware.movieapp.models.Movie;
 import com.rambosoftware.movieapp.models.MovieDetails;
 import com.rambosoftware.movieapp.services.MovieDetailService;
 import com.rambosoftware.movieapp.services.MovieService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -26,7 +24,7 @@ public class MovieDetailsLoader {
     }
 
 
-    public void loadPosters(){
+    public void loadPosters() {
 
         System.out.println("Starting Load movies posters....");
 
@@ -35,48 +33,48 @@ public class MovieDetailsLoader {
         String line = "";
         String cvsSplitBy = ",\"";
         Set<Movie> movieList = movieService.findAll();
-        String prefix = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/";
+        String prefix = "https://image.tmdb.org/t/p/w600_and_h900_bestv2";
         String movieName = "";
         String url = null;
         try {
-
-            br = new BufferedReader(new FileReader(csvFile));
-
-            br.readLine();
-
-            for(Movie m : movieList){
-                movieName = m.getName();
-                while ((line = br.readLine()) != null) {
-                    String[] csvLine = line.split(cvsSplitBy);
-                    for (int j = 0; j < csvLine.length; j++) {
-                        if (csvLine[j].contains(movieName)) {
-                            for (int k = 0; k < csvLine.length; k++) {
-                                if (csvLine[k].contains(".jpg")) {
-                                    url = csvLine[k];
-                                    break;
-                                }
+            for (Movie m : movieList) {
+                br = new BufferedReader(new FileReader(csvFile));
+                br.readLine();
+                movieName = fixMovieTitle(m.getName());
+                MovieDetails md = movieDetailService.findById(m.getMovieId());
+                while ((line = br.readLine()) != null && md.getUrl() == null) {
+                    url = null;
+                    if (line.indexOf(movieName) > -1) {
+                        try {
+                            url = line.substring(line.indexOf(".jpg") - 28, line.indexOf(".jpg") + 4);
+                        } catch (Exception e) {
+                        } finally {
+                            String getUrl = null;
+                            if(url != null) {
+                                getUrl = prefix + fixUrl(url);
+                            }else{
+                                //System.out.println("Not found.");
                             }
+
+                            md.setUrl(getUrl);
+                            movieDetailService.save(md);
+                            br.close();
+                            break;
                         }
                     }
                 }
-                if(url != null) {
-                    String getUrl = prefix + url.substring(url.length() - 31);
-//                    MovieDetails md = movieDetailService.findById(m.getMovieId());
-//                    md.setUrl(getUrl);
-//                    movieDetailService.save(md);
-                    System.out.println(getUrl);
-                }else{
-                    // System.out.println("Not Found.");
+
                 }
 
-            }
 
         } catch (FileNotFoundException e) {
+             System.out.println("File not found");
             e.printStackTrace();
         } catch (IOException e) {
+             System.out.println("Error");
             e.printStackTrace();
         } finally {
-            System.out.println("Loading done.");
+             System.out.println("Loading done.");
             if (br != null) {
                 try {
                     br.close();
@@ -87,7 +85,38 @@ public class MovieDetailsLoader {
         }
     }
 
-    public void loadDetails(){
+    private String fixMovieTitle(String movie) {
+        String movieTitle = movie.trim();
+        if (movieTitle.indexOf("The") > -1) {
+            try {
+                String tempTitle = movieTitle.substring(0, movieTitle.length() - 5);
+                movieTitle = "The " + tempTitle;
+                return movieTitle;
+            }catch (Exception e){
+                return  movieTitle;
+            }
+        } else if (movieTitle.indexOf(", A") > -1) {
+            try {
+                String tempTitle = movieTitle.substring(0, movieTitle.length() - 3);
+                movieTitle = "A " + tempTitle;
+            }catch (Exception e){
+                return movieTitle;
+            }
+        }
+        return movieTitle;
+
+    }
+
+    private String fixUrl(String url) {
+        if (url.indexOf("'") == 0) {
+            String result = url.substring(1);
+            return result;
+        } else {
+            return url;
+        }
+    }
+
+    public void loadDetails() {
 
         System.out.println("Starting Load movies details....");
 
@@ -102,19 +131,19 @@ public class MovieDetailsLoader {
             br = new BufferedReader(new FileReader(csvFile));
 
             br.readLine();
-            while ((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 String[] csvLine = line.split(cvsSplitBy);
 
                 Long id = Long.parseLong(csvLine[0]);
 
                 try {
                     year = Long.parseLong(csvLine[1].substring(csvLine[1].length() - 6, csvLine[1].length() - 2).trim());
-                }catch (Exception e){
+                } catch (Exception e) {
                     year = 0L;
                 }
                 String[] category = csvLine[2].split("[|]");
                 String readyCategory = "";
-                for(String s : category){
+                for (String s : category) {
                     readyCategory = readyCategory + " " + s;
                 }
                 readyCategory = readyCategory.replace("\"", "").trim();

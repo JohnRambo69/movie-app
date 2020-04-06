@@ -9,9 +9,9 @@
 <div class="container">
 <div class="row">
     <div class="col-md-6" align="center" style="margin-top: 70px">
-        <div class="card" style="width: 20rem;">
+        <div class="card text-white bg-secondary mb-3" style="width: 20rem;">
             <img src="../static/resources/images/mix_logo.jpg" th:src="@{/resources/images/mix_logo.jpg}" class="card-img-top" alt="Rambo Software">
-            <div class="card-body" bgcolor="#E6E6FA">
+            <div class="card-body">
                 <h5 class="card-title">Movie Mate</h5>
                 <p class="card-text">Nasza baza danych.
                 Jest do twojej dyspozycji. Posiadamy ponad 45 tysięcy filmów w naszej kolekcji !</p>
@@ -20,13 +20,23 @@
         </div>
     </div>
     <div class="col-md-6" align="center">
-        <img class="img-responsive" src="../static/resources/images/movie_time.png" th:src="@{/resources/images/movie_time.png}" width="50%" height="45%"/>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h3 class="display-4">Fluid jumbotron</h3>
-                <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <img class="img-responsive" src="../static/resources/images/movie_time.png" th:src="@{/resources/images/movie_time.png}" width="55%" height="45%"/>
+        <div class="card" style="width: 28rem;">
+            <div class="card-body" style="background: grey">
+                <h5 class="card-title"><font color="white">Movie Recommendation</font></h5>
+                <p class="card-text"><font color="white">Nasza baza danych posiada ponad 27 tysięcy filmów, 2 tysiące użytkowników którzy
+                    ocenili ponad 200 tysięcy filmów. Tu znajdziesz większość filmów wyprodukowanych do 2016 roku.
+                </font></p>
             </div>
         </div>
+<!--        <div class="jumbotron jumbotron-fluid" style="background: grey">
+            <div class="container">
+                <h5 class="display-4"><font color="white">Movie Recommendation</font></h5>
+                <p class="lead"><font color="white">Nasza baza danych posiada ponad 27 tysięcy filmów, 2 tysiące użytkowników którzy
+                ocenili ponad 200 tysięcy filmów. Tu znajdziesz większość filmów wyprodukowanych do 2016 roku.
+                </font></p>
+            </div>
+        </div>-->
     </div>
 
 </div>
