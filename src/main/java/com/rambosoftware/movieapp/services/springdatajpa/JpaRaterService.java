@@ -26,6 +26,7 @@ public class JpaRaterService implements RaterService {
 
     @Override
     public Rater findById(Long aLong) {
+
         return raterRepository.findById(aLong).orElse(null);
     }
 

@@ -1,11 +1,14 @@
 package com.rambosoftware.movieapp.services.springdatajpa;
 
+import com.rambosoftware.movieapp.models.Movie;
 import com.rambosoftware.movieapp.models.MovieDetails;
 import com.rambosoftware.movieapp.repositories.MovieDetailRepository;
 import com.rambosoftware.movieapp.services.MovieDetailService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -42,6 +45,11 @@ public class JpaMovieDetailsService implements MovieDetailService {
     @Override
     public void deleteById(Long aLong){
         movieDetailRepository.deleteById(aLong);
+    }
+
+    @Override
+    public List<MovieDetails> findByCategoryLike(@Param("categoryName") String categoryName){
+        return movieDetailRepository.findByCategoryLike(categoryName);
     }
 
 }

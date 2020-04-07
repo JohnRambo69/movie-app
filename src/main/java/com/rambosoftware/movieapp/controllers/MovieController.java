@@ -1,14 +1,14 @@
 package com.rambosoftware.movieapp.controllers;
 
 import com.rambosoftware.movieapp.models.Movie;
-import com.rambosoftware.movieapp.repositories.MovieRepository;
 import com.rambosoftware.movieapp.services.MovieDetailService;
 import com.rambosoftware.movieapp.services.MovieService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class MovieController {
 
     private final String VIEWS_MOVIE_DETAILS = "movies/movieDetails";
     private final String VIEWS_MOVIE_FIND = "movies/findMovies";
-    private final String VIEWS_ERROR = "errors/notFound";
+    private final String VIEWS_ERROR = "redirect:/error/error";
 
     MovieService movieService;
     MovieDetailService movieDetailService;

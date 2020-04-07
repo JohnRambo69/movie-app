@@ -1,9 +1,6 @@
 package com.rambosoftware.movieapp.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,6 +11,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ratings")
 public class Rating extends BaseEntity {
+
+    @Builder
+    public Rating(Long id, Long movieId, Double rating) {
+        super(id);
+        this.movieId = movieId;
+        this.rating = rating;
+    }
+
+    public Rating(Long movieId, Double rating) {
+        this.movieId = movieId;
+        this.rating = rating;
+    }
 
     @Column(name="movie_id")
     private Long movieId;

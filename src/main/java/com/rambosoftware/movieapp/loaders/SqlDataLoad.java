@@ -1,11 +1,15 @@
 //package com.rambosoftware.movieapp.loaders;
 //
 //import com.rambosoftware.movieapp.models.Movie;
+//import com.rambosoftware.movieapp.models.MovieDetails;
 //import com.rambosoftware.movieapp.models.Rater;
 //import com.rambosoftware.movieapp.models.Rating;
 //import com.rambosoftware.movieapp.recommender.Recommender;
+//import com.rambosoftware.movieapp.repositories.RatingRepository;
+//import com.rambosoftware.movieapp.services.MovieDetailService;
 //import com.rambosoftware.movieapp.services.MovieService;
 //import com.rambosoftware.movieapp.services.RaterService;
+//import com.rambosoftware.movieapp.services.RatingService;
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.stereotype.Component;
 //
@@ -16,18 +20,26 @@
 //
 //@Component
 //public class SqlDataLoad implements CommandLineRunner {
-//
+
 //    private final RaterService raterService;
 //    private final MovieService movieService;
+//    private final MovieDetailService movieDetailService;
+//    private final RatingService ratingService;
 //
-//
-//    public SqlDataLoad(RaterService raterService, MovieService movieService) {
+//    public SqlDataLoad(RaterService raterService, MovieService movieService, MovieDetailService movieDetailService, RatingService ratingService) {
 //        this.raterService = raterService;
 //        this.movieService = movieService;
+//        this.movieDetailService = movieDetailService;
+//        this.ratingService = ratingService;
 //    }
-
-  //  @Override
- //   public void run(String... args) throws Exception {
+//
+//    @Override
+//    public void run(String... args) throws Exception {
+//        Long sum = ratingService.sumRatingsByMovieId(1L);
+//        System.out.println(sum);
+//        System.out.println("Done.");
+//    }
+//    }
 //        System.out.println("Im alieve !!");
 //        Recommender r = new Recommender();
 //        Rater rater1 = raterService.findById(587L);
