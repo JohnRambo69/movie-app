@@ -1,4 +1,4 @@
-//package com.rambosoftware.movieapp.loaders;
+package com.rambosoftware.movieapp.loaders;
 //
 //import com.rambosoftware.movieapp.models.Movie;
 //import com.rambosoftware.movieapp.models.MovieDetails;
@@ -18,8 +18,55 @@
 //import java.util.Map;
 //import java.util.Set;
 //
-//@Component
-//public class SqlDataLoad implements CommandLineRunner {
+
+import com.opencsv.CSVReader;
+import com.rambosoftware.movieapp.models.Movie;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+
+public class SqlDataLoad {
+
+
+    public static void main(String[] args){
+        System.out.println("Starting Load movies....");
+
+        String csvFile = "src/main/resources/data/ratedmoviesfull.csv";
+
+
+        try {
+            FileReader filereader = new FileReader(csvFile);
+            CSVReader csvReader = new CSVReader(filereader);
+            String[] nextRecord;
+
+
+            for(int i = 0; i < 5; i++){
+                nextRecord = csvReader.readNext();
+                for (String cell : nextRecord) {
+                    System.out.println(cell + "\t");
+                }
+
+
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("other");
+            e.printStackTrace();
+        } finally {
+            System.out.println("Movie loaded.");
+
+            }
+        }
+
+    }
+
+
+
 
 //    private final RaterService raterService;
 //    private final MovieService movieService;

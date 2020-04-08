@@ -43,7 +43,7 @@ public class Rating extends BaseEntity {
 
         Rating r = (Rating) o;
 
-        return r.getMovieId() == this.getMovieId();
+        return r.getMovieId().equals(this.getMovieId());
     }
 
 }

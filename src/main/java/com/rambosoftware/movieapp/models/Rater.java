@@ -30,16 +30,16 @@ public class Rater implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "rater", cascade = {CascadeType.ALL})
     private List<Rating> ratings = new ArrayList<>();
 
-    public Rating getRatingByMovieId(Long movieId){
-
-        Rating rating = ratings.stream().filter(m -> m.getMovieId() == movieId)
-                .reduce((a, b) -> {
-                    throw new IllegalStateException("Multiple elements: " + a + ", " + b);
-                })
-                .get();
-
-        return rating;
-    }
+//    public Rating getRatingByMovieId(Long movieId){
+//
+//        Rating rating = ratings.stream().filter(m -> m.getMovieId() == movieId)
+//                .reduce((a, b) -> {
+//                    throw new IllegalStateException("Multiple elements: " + a + ", " + b);
+//                })
+//                .get();
+//
+//        return rating;
+//    }
 
     public boolean hasRated(Rating rating){
         if(ratings.contains(rating)){

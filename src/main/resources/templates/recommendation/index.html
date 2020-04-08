@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Movies To Rate</title>
+</head>
+
+<body>
+
+<h2>Movies</h2>
+<div class="col-6">
+<form action="#" th:action="@{/rcmd/save}" th:object="${moviesRatings}"
+      method="post">
+<table id="moviesTable" class="table table-striped">
+    <tbody>
+    <tr th:each="ratingsList, stats : *{ratingsLists}">
+        <td>
+<!--        <td th:text="*{ratingsLists[__${stats.index}__].title}">-->
+        <a th:text="*{ratingsLists[__${stats.index}__].title}"/>
+
+        <td/>
+
+        <td>
+                <select th:field="*{ratingsLists[__${stats.index}__].rate}">
+                    <option th:value="1.0">1</option>
+                    <option th:value="2.0">2</option>
+                    <option th:value="3.0">3</option>
+                    <option th:value="4.0">4</option>
+                    <option th:value="5.0">5</option>
+                    <option th:value="6.0">6</option>
+                    <option th:value="7.0">7</option>
+                    <option th:value="8.0">8</option>
+                    <option th:value="9.0">9</option>
+                    <option th:value="10.0">10</option>
+                </select>
+            <select th:field="*{ratingsLists[__${stats.index}__].title}" hidden>
+                <option th:value="*{ratingsLists[__${stats.index}__].title}">1.0</option>
+            </select>
+            <select th:field="*{ratingsLists[__${stats.index}__].movieId}" hidden>
+                <option th:value="*{ratingsLists[__${stats.index}__].movieId}">1.0</option>
+            </select>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    <input  class="btn btn-dark my-2 my-sm-0" type="submit" id="submitButton" th:value="Save">
+</form>
+</div>
+</body>
+</html>

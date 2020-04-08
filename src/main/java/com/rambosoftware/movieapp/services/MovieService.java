@@ -8,6 +8,8 @@ public interface MovieService extends CrudService<Movie, Long> {
 
     Movie findById(Long id);
 
-    List<Movie> findAllByNameLike(String name);
+    List<Movie> findAllByTitleLike(String name);
+
+    List<Movie> findRandom();
 
 }

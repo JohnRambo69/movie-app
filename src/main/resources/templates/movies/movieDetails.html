@@ -12,23 +12,36 @@
 <div class="container">
     <div class="row">
     <div class="col-5">
-<table class="table table-striped" th:object="${movieDetails}">
+<table class="table table-striped" th:object="${movie}">
     <tr>
         <th></th>
-        <td th:object="${movie}"><b th:text="*{name}"></b></td>
+        <td ><b th:text="*{title}"></b></td>
     </tr>
     <tr>
     <th>Year</th>
-    <td><b th:text="*{year}"></b></td>
+    <td th:text="*{year}"></td>
 </tr>
     <tr>
         <th>Category</th>
-        <td th:text="*{category}" /></td>
+        <td th:text="*{genre}" /></td>
+    </tr>
+    </tr>
+    <tr>
+        <th>Country</th>
+        <td th:text="*{country}" /></td>
+    </tr>
+    <tr>
+        <th>Duration</th>
+        <td th:text="*{minutes} + ' min'" /></td>
+    </tr>
+    <tr>
+        <th>Directors</th>
+        <td th:text="*{director}" /></td>
     </tr>
 </table>
     </div>
     <div class="col">
-<img class="rounded mx-auto d-block" th:object="${movieDetails}" th:src="@{*{url}}" alt="/static/resources/images/movie_night.jpg" width="45%" height="80%">
+<img class="rounded mx-auto d-block"  th:src="@{*{movie.poster}}" alt="No picture available" width="45%" height="80%">
     </div>
 
     </div>

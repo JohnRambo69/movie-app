@@ -46,7 +46,12 @@ public void deleteById(Long aLong){
         }
 
     @Override
-    public List<Movie> findAllByNameLike(String name) {
-        return movieRepository.findAllByNameLike(name);
+    public List<Movie> findAllByTitleLike(String name) {
+        return movieRepository.findAllByTitleLike(name);
     }
+
+    @Override
+    public List<Movie> findRandom(){
+        return movieRepository.findRandom();
+    };
 }

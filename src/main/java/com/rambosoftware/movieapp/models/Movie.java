@@ -20,16 +20,46 @@ import java.util.Set;
 public class Movie implements Serializable {
 
     @Builder
-    public Movie( String name, Long movieId) {
-        this.name = name;
+    public Movie(Long movieId, String title, Integer year, String country
+            , String genre, Integer minutes, String director, String poster, List<Rater> raters) {
         this.movieId = movieId;
+        this.title = title;
+        this.year = year;
+        this.country = country;
+        this.genre = genre;
+        this.minutes = minutes;
+        this.director = director;
+        this.poster = poster;
+        this.raters = raters;
     }
+
+
+
+
 
     @Id
     Long movieId;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="title")
+    private String title;
+
+    @Column(name="year")
+    private Integer year;
+
+    @Column(name="country")
+    private String country;
+
+    @Column(name="genre")
+    private String genre;
+
+    @Column(name="minutes")
+    private Integer minutes;
+
+    @Column(name="director")
+    private String director;
+
+    @Column(name="poster")
+    private String poster;
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "movie", cascade = {CascadeType.ALL})

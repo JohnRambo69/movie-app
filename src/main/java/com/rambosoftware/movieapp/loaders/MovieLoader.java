@@ -1,66 +1,51 @@
 package com.rambosoftware.movieapp.loaders;
 
+import com.opencsv.CSVReader;
 import com.rambosoftware.movieapp.models.Movie;
-import com.rambosoftware.movieapp.services.MovieDetailService;
 import com.rambosoftware.movieapp.services.MovieService;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 @Component
 public class MovieLoader {
 
     private MovieService movieService;
-    private MovieDetailService movieDetailService;
 
-    public MovieLoader(MovieService movieService, MovieDetailService movieDetailService) {
+    public MovieLoader(MovieService movieService) {
         this.movieService = movieService;
-        this.movieDetailService = movieDetailService;
     }
 
 
-    public void loadMovies(){
-
+    public void loadMovies() {
         System.out.println("Starting Load movies....");
 
-        String csvFile = "src/main/resources/data/movie.csv";
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",\"";
+        String csvFile = "src/main/resources/data/ratedmoviesfull.csv";
 
         try {
+            FileReader filereader = new FileReader(csvFile);
+            CSVReader csvReader = new CSVReader(new InputStreamReader(new FileInputStream(csvFile), "Cp1252"));
+            String[] nr;
 
-            br = new BufferedReader(new FileReader(csvFile));
-            br.readLine();
-            while ((line = br.readLine()) != null) {
-
-                String[] csvLine = line.split(cvsSplitBy);
-                Long id = Long.parseLong(csvLine[0]);
-                String title = csvLine[1].substring(0, csvLine[1].length() - 7);
-                String[] category = csvLine[2].split("|") ;
-
-                Movie movie = Movie.builder().movieId(id).name(title).build();
+            nr = csvReader.readNext();
+            while ((nr = csvReader.readNext()) != null) {
+               if(nr[5].length() > 250){
+                   nr[5] = nr[5].substring(0,250);
+               }
+                Movie movie = new Movie().builder().movieId(Long.valueOf(nr[0])).title(nr[1])
+                        .year(Integer.valueOf(nr[2])).country(nr[3]).genre(nr[4])
+                        .director(nr[5]).minutes(Integer.valueOf(nr[6])).poster(nr[7]).build();
                 movieService.save(movie);
-
             }
         } catch (FileNotFoundException e) {
+            System.out.println("file");
             e.printStackTrace();
         } catch (IOException e) {
+            System.out.println("other");
             e.printStackTrace();
         } finally {
             System.out.println("Movie loaded.");
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
 
+        }
     }
 }
